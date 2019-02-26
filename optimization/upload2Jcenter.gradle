@@ -1,0 +1,40 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+//发布到jcenter的配置
+bintray {
+    user = 'xxxxxx'
+    key = 'xxxxxxxxxxxxxxxx'
+    publications = ['plugin']
+    pkg {
+        repo = 'AndroidImageOptimization' //仓库名
+        name = 'optimization'  //项目名
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/MISAYAWANGLEI/ImageOptimization.git'
+        version {
+            desc = 'optimizer android image resource'
+            released  = new Date()
+            vcsTag = '1.0'//版本控制的版本号
+            //attributes = ['gradle-plugin': 'xxxxx']
+        }
+    }
+}
+
+publishing{
+    publications{
+        plugin(MavenPublication){
+            from components.java
+            artifactId 'optimization'
+            artifact sourcesJar
+            artifact docJar
+            //
+            pom.withXml{
+                def root = asNode()
+                def licensesNode = root.appendNode('licenses').appendNode('license')
+                licensesNode.appendNode('name','Apache License, Version 2.0')
+                licensesNode.appendNode('url','https://www.apache.org/licenses/LICENSE-2.0.txt')
+                licensesNode.appendNode('distribution','repo')
+                licensesNode.appendNode('comments','A business-friendly OSS license')
+            }
+        }
+    }
+}

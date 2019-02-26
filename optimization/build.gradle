@@ -1,0 +1,82 @@
+apply plugin: 'java-library'
+apply plugin: 'groovy'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:3.3.1'
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+apply from: 'upload2Jcenter.gradle'
+
+group "com.wanglei.image-optimization"
+version  "1.0"
+
+//apply plugin: 'maven-publish'
+//
+////上传本地配置
+//publishing{
+//    publications{
+//        optimizer(MavenPublication){
+//            from components.java
+//            artifactId = "optimization"
+//        }
+//    }
+//}
+
+//源代码打包任务
+task sourcesJar(type :Jar){
+    baseName 'optimization'
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+//生成文档任务
+task docJar(type :Jar,dependsOn:[javadoc,groovydoc]){
+    baseName 'optimization'
+    classifier 'doc'
+    from javadoc.destinationDir,groovydoc.destinationDir
+}
+//配置 工程工件 jar产出的配置
+artifacts{
+    archives sourcesJar
+    archives docJar
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

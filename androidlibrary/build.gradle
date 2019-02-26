@@ -1,0 +1,113 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+//上传的库的名字，是和你Module的名字是一样的！！！所以你的Module叫什么，
+// 你的gradle依赖路径就是： groupId:moduleName:publishVersion
+//module是android library如下配置上传jcenter，
+// 先执行other分组中的instal任务生成pom文件，在执行publishing分组中的bintrayUpload任务上传
+group "com.wanglei.image-optimization"
+version  "1.0"
+
+
+//源代码打包任务
+task sourcesJar(type :Jar){
+    classifier 'sources' //分类器 区分其他jar包
+    from android.sourceSets.main.java.srcDirs
+}
+//创建文档生成任务
+task javadoc(type:Javadoc){
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    options.encoding "UTF-8"
+    options.charSet 'UTF-8'
+    failOnError false
+}
+
+task docJar(type :Jar,dependsOn:javadoc){
+    classifier 'doc' //分类器 区分其他jar包
+    from javadoc.destinationDir
+}
+//配置 工程工件 jar产出的配置
+artifacts{
+    archives sourcesJar
+    archives docJar
+}
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
+}
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+bintray {
+    user = 'xxxx'
+    key = 'apiKey'
+    configurations = ['archives']
+    pkg {
+        repo = 'AndroidImageOptimization' //仓库名
+        name = 'optimization'  //项目名
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/MISAYAWANGLEI/ImageOptimization.git'
+        version {
+            desc = 'android image optimizer plugin'
+            released  = new Date()
+            vcsTag = '1.0'
+        }
+    }
+
+}
+
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            developers {
+                developer {
+                    id 'misaya'
+                    name 'wanglei'
+                    email 'wanglei.pado@gmail.com'
+                }
+            }
+        }
+    }
+}

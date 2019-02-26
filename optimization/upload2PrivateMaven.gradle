@@ -1,0 +1,34 @@
+//私服地址:http://www.sonatype.org/nexus/ 可用于公司搭建自己的私服
+//发布到maven私服配置
+apply plugin: 'maven-publish'
+
+publishing{
+    publications{
+        plugin(MavenPublication){
+            from components.java
+            artifactId 'optimization'
+            artifact sourcesJar
+            artifact docJar
+            //
+            pom.withXml{
+                def root = asNode()
+                def licensesNode = root.appendNode('licenses').appendNode('license')
+                licensesNode.appendNode('name','Apache License, Version 2.0')
+                licensesNode.appendNode('url','https://www.apache.org/licenses/LICENSE-2.0.txt')
+                licensesNode.appendNode('distribution','repo')
+                licensesNode.appendNode('comments','A business-friendly OSS license')
+            }
+        }
+    }
+    //配置上传仓库信息
+    repositories{
+        maven{
+            name 'xxx'//私服仓库名字
+            url 'http://localhost:8081/repository/xxx/'//私服地址
+            credentials{
+                username = 'wanglei'//用户名
+                password = '123456'//密码
+            }
+        }
+    }
+}
