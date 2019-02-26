@@ -50,9 +50,34 @@ ImageOptimization{
     pngCompressQuality = 79
 }
 ```  
+ImageOptimization支持多项参数配置，灵活度高，可根据项目需要自己配置参数，可配置优先转为webp不能转换的在进行图片的压缩，同样你也可以配置只进行图片的压缩而不转为webp
 
+### 配置项参数说明
 
+| 参数 | 是否必须 |参数配置 |参数说明 |
+|--|--|--|--|
+| pluginStrategy | 否 | 可配置"webp"或者"compress" | 插件运行策略参数：如配置为"webp"则会将图片优先转为webp格式，如果不能转换或者转换失败或转换为图片更大则进行图片的压缩，如配置为"compress"则只进行图片的压缩不会转为webp，此参数如不配置默认为"compress" |
+| convertWebpType | 否 | 可配置"lossy"或者"lossless" | webp转换类型参数："lossy"转为webp采用有损转换模式，"lossless"转为webp采用无损模式，此参数默认为"lossy" |
+| compressPngType | 否 | 可配置"lossy"或者"lossless" | png图片压缩类型参数："lossy"为压缩png采用有损压缩模式，"lossless"为压缩png采用无损压缩模式，此参数默认为"lossy" |
+| pngCompressQuality | 否 | 可配置范围为[0,100] | png图片压缩质量参数：默认为80，建议使用默认即可，此参数为compressPngType为"lossy"时起作用，也就是有损压缩才起作用 |
+| convertWebpQuality | 否 | 可配置范围为[0,100] | 图片转为webp的质量参数：默认为75，此参数为谷歌建议的参数，建议不要更改，转换webp有损模式下此参数才起作用 |
+| jpegCompressQuality | 否 | 可配置范围为[84,100] | jpg图片压缩质量参数：默认为84 |
+| appIconRoundName | 否 | 项目app圆形启动图标的名字，不包括图片扩展名 | 如圆形启动图标为：icon_round.png，这里配置为icon_round |
+| appIconName | 是 | 项目app启动图标的名字，不包括图片扩展名 | 如启动图标为：icon.png，这里配置为icon |
 
+### 图片压缩效果对比
+
+#### PNG图片
+| 原图 | 转为webp | lossy有损压缩 | lossless无损压缩 |
+|--|--|--|--|
+| ![](imageafter/h.png) | ![](imageafter/h_webp.png) | ![](imageafter/h_lossy.png) | ![](imageafter/h_lossless.png) |
+| 50.05k | 15.28k | 13.64k | 42.21k |
+
+#### jpg图片
+| 原图 | 转为webp | lossy有损压缩 |
+|--|--|--|
+| ![](imageafter/wece.png) | ![](imageafter/wece_webp.png) | ![](imageafter/wece_lossy.png) |
+| 7.91k | 2.82k | 5.17k |
 
 
 
