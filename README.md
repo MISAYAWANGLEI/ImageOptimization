@@ -32,7 +32,7 @@ buildscript {
 
 ### 任务生成规则
 
-imageOptimization_project名字_variantname
+imageOptimization_module名字_variant名字
 
 ### 配置项
 
