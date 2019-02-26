@@ -28,7 +28,7 @@ buildscript {
 
 同步之后会生成如下任务：双击执行任务即可
 
-![Task](imageafter/tasks.jpg)  
+![](imageafter/tasks.jpg)  
 
 ### 任务生成规则
 
@@ -69,7 +69,7 @@ ImageOptimization支持多项参数配置，灵活度高，可根据项目需要
 
 #### PNG图片
 | 原图 | 有损转为webp | 无损转为webp | lossy有损压缩 | lossless无损压缩 |
-|--|--|--|--|
+|--|--|--|--|--|
 | ![](imageafter/h.png) | ![](imageafter/h_webp.webp) | ![](imageafter/h_webp_lossless.webp) | ![](imageafter/h_lossy.png) | ![](imageafter/h_lossless.png) |
 | 50.05k | 15.28k | 30.30k | 13.64k | 42.21k |
 
@@ -79,9 +79,13 @@ ImageOptimization支持多项参数配置，灵活度高，可根据项目需要
 | ![](imageafter/wece.jpg) | ![](imageafter/wece_webp.webp) | ![](imageafter/wece_lossy.jpg) |
 | 7.91k | 2.82k | 5.17k |
 
+#### 由于GitHub不能正常显示webp图片，上图webp图片无法正常显示，可到imageafter文件夹中查看对应图片
 
+###  额外说明
 
+插件运行的时候会有相应信息打印出：
 
+![](imageafter/log.jpg)  
 
 
 
