@@ -68,13 +68,13 @@ ImageOptimization支持多项参数配置，灵活度高，可根据项目需要
 ### 图片压缩效果对比
 
 #### PNG图片
-| 原图 | 转为webp | lossy有损压缩 | lossless无损压缩 |
+| 原图 | 有损转为webp | 无损转为webp | lossy有损压缩 | lossless无损压缩 |
 |--|--|--|--|
-| ![](imageafter/h.png) | ![](imageafter/h_webp.webp) | ![](imageafter/h_lossy.png) | ![](imageafter/h_lossless.png) |
-| 50.05k | 15.28k | 13.64k | 42.21k |
+| ![](imageafter/h.png) | ![](imageafter/h_webp.webp) | ![](imageafter/h_webp_lossless.webp) | ![](imageafter/h_lossy.png) | ![](imageafter/h_lossless.png) |
+| 50.05k | 15.28k | 30.30k | 13.64k | 42.21k |
 
 #### jpg图片
-| 原图 | 转为webp | lossy有损压缩 |
+| 原图 | 有损转为webp | lossy有损压缩 |
 |--|--|--|
 | ![](imageafter/wece.jpg) | ![](imageafter/wece_webp.webp) | ![](imageafter/wece_lossy.jpg) |
 | 7.91k | 2.82k | 5.17k |
