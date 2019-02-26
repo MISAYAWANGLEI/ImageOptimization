@@ -79,7 +79,7 @@ ImageOptimization支持多项参数配置，灵活度高，可根据项目需要
 | ![](imageafter/wece.jpg) | ![](imageafter/wece_webp.webp) | ![](imageafter/wece_lossy.jpg) |
 | 7.91k | 2.82k | 5.17k |
 
-#### 由于GitHub不能正常显示webp图片，上图webp图片无法正常显示，可到imageafter文件夹中查看对应图片
+#### 由于GitHub有时不能正常显示webp图片，上图webp图片可能无法正常显示，可到imageafter文件夹中查看对应图片
 
 ###  额外说明
 
