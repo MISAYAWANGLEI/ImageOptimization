@@ -14,7 +14,7 @@ targetCompatibility = "1.7"
 apply from: 'upload2Jcenter.gradle'
 
 group "com.wanglei.image-optimization"
-version  "1.0"
+version  "2.0"
 
 //apply plugin: 'maven-publish'
 //

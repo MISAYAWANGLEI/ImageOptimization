@@ -94,7 +94,7 @@ class ImageOptimizationUtils {
             throw new InvalidParameterException("compressPngType error. Please use lossy or lossless, default is lossy ，you set $compressPngType")
         }
 
-        if (!pluginStrategy.equalsIgnoreCase(ImageOptimizationConstants.STRATEGY_ONLY_COMPRESS)
+        if (!pluginStrategy.equalsIgnoreCase(ImageOptimizationConstants.STRATEGY_ONLIY_COMPRESS)
                 && !pluginStrategy.equalsIgnoreCase(ImageOptimizationConstants.STRATEGY_WEBP)) {
             throw new InvalidParameterException("pluginStrategy error. Please use webp or compress, default is compress ，you set $pluginStrategy")
         }

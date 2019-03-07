@@ -26,7 +26,11 @@ ImageOptimization{
     appIconRoundName = "ic_launcher_round"
     convertWebpType = "lossy"
     compressPngType = "lossless"
-    pngCompressQuality = 79
+    pngCompressQuality = 80
+    filter{
+        //filterDirs = ["mipmap-hdpi","mipmap-xhdpi","mipmap-xxhdpi"]
+        //filterImageNames = ["cdc.PNG","wew.jpeg","c.png"]
+    }
 }
 
 dependencies {

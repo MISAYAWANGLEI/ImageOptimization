@@ -25,7 +25,10 @@ class ImageOptimizationPlugin implements Plugin<Project> {
     static void startApply(Project project, DomainObjectCollection<BaseVariant> variants) {
         //创建扩展，外部可以配置的参数
         def imgExt = project.extensions.create(ImageOptimizationConstants.IMG_EXT_NAME, ImageOptimizationExtensions)
+        def imgFilterExt = project.ImageOptimization.extensions.create(ImageOptimizationConstants.IMG_FILTER_EXT_NAME, ImageOptimizationFilterExtensions)
+
         project.afterEvaluate {
+            project.logger.error "过滤图片文件夹目录名：${imgFilterExt.filterDirs}"
             variants.all {
                 BaseVariant variant ->
                     //存放图片文件夹集合
@@ -34,8 +37,14 @@ class ImageOptimizationPlugin implements Plugin<Project> {
                         sourceSet.resDirectories.each { res ->
                             if (res.exists()) {
                                 res.eachDir {
+                                    //是图片目录
                                     if (it.directory && ImageOptimizationUtils.isImageFolder(it)) {
-                                        imgDirs << it
+                                        //过滤用户配置的满足条件的图片
+                                        if (imgFilterExt.filterDirs == null ||
+                                                (imgFilterExt.filterDirs != null
+                                                        && !imgFilterExt.filterDirs.contains(it.name))){
+                                            imgDirs << it
+                                        }
                                     }
                                 }
                             }
@@ -69,6 +78,8 @@ class ImageOptimizationPlugin implements Plugin<Project> {
                             pngCompressQuality = imgExt.pngCompressQuality
                             //插件策略，默认只压缩
                             pluginStrategy = imgExt.pluginStrategy
+                            //
+                            filterImageNames = imgFilterExt.filterImageNames
                         }
                         //task.dependsOn variant.outputs.first().processManifest
                     }

@@ -10,5 +10,5 @@ class ImageOptimizationExtensions{
     String appIconRoundName //圆形启动图标的图片名字
     def convertWebpType = ImageOptimizationConstants.LOSSY //转换webp的模式，默认有损
     def compressPngType = ImageOptimizationConstants.LOSSY //压缩png的模式，默认有损
-    def pluginStrategy = ImageOptimizationConstants.STRATEGY_ONLY_COMPRESS //默认插件策略为只压缩图片
+    def pluginStrategy = ImageOptimizationConstants.STRATEGY_ONLIY_COMPRESS //默认插件策略为只压缩图片
 }

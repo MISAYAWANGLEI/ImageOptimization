@@ -55,7 +55,11 @@ class ImageOptimizationTask extends DefaultTask{
 
     @Input
     @Optional
-    String pluginStrategy = ImageOptimizationConstants.STRATEGY_ONLY_COMPRESS
+    String pluginStrategy = ImageOptimizationConstants.STRATEGY_ONLIY_COMPRESS
+
+    @Input
+    @Optional
+    def filterImageNames = null //需要过滤的图片名字集合
 
     //jpg的压缩目前不支持外部设置，统一有损压缩
     String compressJpgType = ImageOptimizationConstants.LOSSY
@@ -97,6 +101,7 @@ class ImageOptimizationTask extends DefaultTask{
         project.logger.error "mini sdk : $minSdk"
         project.logger.error "convertWebpType : $convertWebpType"
         project.logger.error "compressPngType : $compressPngType"
+        project.logger.error "需要过滤的图片：$filterImageNames"
         res.each {
             project.logger.error "image dir : $it.absolutePath"
         }
@@ -124,9 +129,15 @@ class ImageOptimizationTask extends DefaultTask{
             if (ImageOptimizationUtils.isImageFolder(it)){
                 it.eachFile {
                     if (ImageOptimizationUtils.isJpgImage(it) && ImageOptimizationUtils.isNotLauncherIcon(it,appIconName,appIconRoundName)){
-                        jpgs << it
+                        if (filterImageNames == null ||
+                                (filterImageNames != null && !filterImageNames.contains(it.name))){
+                            jpgs << it
+                        }
                     }else if(ImageOptimizationUtils.isPngImage(it) && ImageOptimizationUtils.isNotLauncherIcon(it,appIconName,appIconRoundName)){
-                        pngs << it
+                        if (filterImageNames == null ||
+                                (filterImageNames != null && !filterImageNames.contains(it.name))){
+                            pngs << it
+                        }
                     }
                 }
             }
@@ -141,7 +152,7 @@ class ImageOptimizationTask extends DefaultTask{
             project.logger.error "${it.absolutePath}"
         }
         //这里只进行简单的判断
-        if (pluginStrategy.equalsIgnoreCase(ImageOptimizationConstants.STRATEGY_ONLY_COMPRESS)){
+        if (pluginStrategy.equalsIgnoreCase(ImageOptimizationConstants.STRATEGY_ONLIY_COMPRESS)){
             project.logger.error "=========3,start compress Image=========="
             pngs.each {
                 compressPng(it)
