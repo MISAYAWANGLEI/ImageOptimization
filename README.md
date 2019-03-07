@@ -68,8 +68,8 @@ ImageOptimization支持多项参数配置，灵活度高，可根据项目需要
 | jpegCompressQuality | 否 | 可配置范围为[84,100] | jpg图片压缩质量参数：默认为84 |
 | appIconRoundName | 否 | 项目app圆形启动图标的名字，不包括图片扩展名 | 如圆形启动图标为：icon_round.png，这里配置为icon_round |
 | appIconName | 是 | 项目app启动图标的名字，不包括图片扩展名 | 如启动图标为：icon.png，这里配置为icon |
-| filterDirs | 否 | 不需要过滤的图片目录名 | 如 filterDirs = ["mipmap-hdpi","mipmap-xhdpi"] ，mipmap-hdpi与mipmap-xhdpi目录下图片资源保持原样|
-| filterImageNames | 否 | 不需要过滤的图片的名字 | 如 filterImageNames = ["cdc.PNG","wew.jpeg"] ，cdc.PNG与wew.jpeg图片均保持原样，这里要配置完整的图片名包括扩展名并且区分大小写|
+| filterDirs | 否 | 不需要压缩或转换的图片目录名 | 如 filterDirs = ["mipmap-hdpi","mipmap-xhdpi"] ，mipmap-hdpi与mipmap-xhdpi目录下图片资源保持原样|
+| filterImageNames | 否 | 不需要压缩或转换的图片的名字 | 如 filterImageNames = ["cdc.PNG","wew.jpeg"] ，cdc.PNG与wew.jpeg图片均保持原样，这里要配置完整的图片名包括扩展名并且区分大小写|
 
 ### 图片压缩效果对比
 
